@@ -37,4 +37,4 @@ class NewPostPageProvider with ChangeNotifier {
   }
 }
 
-enum NewPostForm { content }
+enum NewPostForm { content, image }
