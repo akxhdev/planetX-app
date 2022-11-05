@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:planetx/models/post.dart';
 
-import 'feed_list_view_item.dart';
+import 'feed_list_view_item/feed_list_view_item.dart';
 
 class FeedListView extends StatelessWidget {
   const FeedListView({
