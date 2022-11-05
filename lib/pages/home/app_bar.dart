@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:planetx/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomePageAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var authProvider = Provider.of<AuthProvider>(context, listen: false);
+
     return AppBar(
       title: Text(
-        "alien",
+        authProvider.alien?.alienId ?? "Alien",
         style: GoogleFonts.robotoMono(
           textStyle: Theme.of(context).textTheme.titleLarge,
         ),
       ),
-      actions: const [
+      actions: [
         IconButton(
-          onPressed: null,
-          icon: Icon(Icons.logout),
+          onPressed: authProvider.logout,
+          icon: const Icon(Icons.logout),
         ),
       ],
     );
