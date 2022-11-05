@@ -4,7 +4,9 @@ import 'package:planetx/pages/home/home_page_provider.dart';
 
 import 'package:provider/provider.dart';
 
+import '../new_post/new_post.dart';
 import 'bottom_nav_bar.dart';
+import 'screens/feed/feed.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -15,12 +17,25 @@ class HomePage extends StatelessWidget {
       appBar: const HomePageAppBar(),
       body: Consumer<HomePageProvider>(
         builder: (context, provider, child) {
-          return Container();
+          return AnimatedSwitcher(
+            duration: const Duration(milliseconds: 700),
+            layoutBuilder: (currentChild, previousChildren) {
+              var currentTab = provider.selectedTab;
+
+              var screens = {
+                HomePageTabs.feed: const FeedScreen(),
+              };
+
+              return screens[currentTab] ?? Container();
+            },
+          );
         },
       ),
-      floatingActionButton: const FloatingActionButton.small(
-        onPressed: null,
-        child: Icon(Icons.add),
+      floatingActionButton: FloatingActionButton.small(
+        onPressed: () {
+          Navigator.of(context).pushNamed(NewPost.routeName);
+        },
+        child: const Icon(Icons.add),
       ),
       bottomNavigationBar: const BottomNavBar(),
     );
