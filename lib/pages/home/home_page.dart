@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../new_post/new_post.dart';
 import 'bottom_nav_bar.dart';
+import 'screens/feed/feed.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -16,7 +17,18 @@ class HomePage extends StatelessWidget {
       appBar: const HomePageAppBar(),
       body: Consumer<HomePageProvider>(
         builder: (context, provider, child) {
-          return Container();
+          return AnimatedSwitcher(
+            duration: const Duration(milliseconds: 700),
+            layoutBuilder: (currentChild, previousChildren) {
+              var currentTab = provider.selectedTab;
+
+              var screens = {
+                HomePageTabs.feed: const FeedScreen(),
+              };
+
+              return screens[currentTab] ?? Container();
+            },
+          );
         },
       ),
       floatingActionButton: FloatingActionButton.small(
