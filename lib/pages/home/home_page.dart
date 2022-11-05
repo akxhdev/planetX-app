@@ -4,6 +4,7 @@ import 'package:planetx/pages/home/home_page_provider.dart';
 
 import 'package:provider/provider.dart';
 
+import '../new_post/new_post.dart';
 import 'bottom_nav_bar.dart';
 
 class HomePage extends StatelessWidget {
@@ -18,9 +19,11 @@ class HomePage extends StatelessWidget {
           return Container();
         },
       ),
-      floatingActionButton: const FloatingActionButton.small(
-        onPressed: null,
-        child: Icon(Icons.add),
+      floatingActionButton: FloatingActionButton.small(
+        onPressed: () {
+          Navigator.of(context).pushNamed(NewPost.routeName);
+        },
+        child: const Icon(Icons.add),
       ),
       bottomNavigationBar: const BottomNavBar(),
     );
