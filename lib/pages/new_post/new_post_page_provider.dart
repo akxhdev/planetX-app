@@ -29,7 +29,7 @@ class NewPostPageProvider with ChangeNotifier {
   bool get _isFormValid => formKey.currentState?.validate() ?? false;
 
   Future<void> onPressed() async {
-    if (!_isFormValid || createPost == null) return;
+    if (!_isFormValid || createPost == null || uploadImage == null) return;
 
     final content = formData[NewPostForm.content];
 
@@ -39,6 +39,17 @@ class NewPostPageProvider with ChangeNotifier {
       content: content,
       postedBy: alienId,
     );
+
+    final imageFile = formData[NewPostForm.image];
+
+    if (imageFile != null) {
+      _showProgressIndicator = true;
+      notifyListeners();
+
+      final imageTempUrl = await uploadImage!(imageFile);
+
+      newPostRequest = newPostRequest.copyWith(imageUrl: imageTempUrl);
+    }
 
     await createPost!(newPostRequest);
   }
