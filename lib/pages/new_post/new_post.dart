@@ -4,6 +4,7 @@ import 'package:planetx/pages/new_post/post_button/post_button.dart';
 import 'package:planetx/pages/new_post/post_button/post_button_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'image_upload_progress.dart';
 import 'new_post_form_field.dart';
 import 'post_image_picker/post_image_picker.dart';
 import 'post_image_picker/post_image_picker_provider.dart';
@@ -36,6 +37,11 @@ class NewPost extends StatelessWidget {
                               onChangeField: provider.onChangeField),
                           child: const PostImagePicker(),
                         ),
+                        if (provider.showProgressIndicator)
+                          Container(
+                            color: Colors.black45,
+                            child: const ImageUploadProgress(),
+                          ),
                       ],
                     ),
                   ),

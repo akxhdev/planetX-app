@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:planetx/models/new_post_request.dart';
 
 class NewPostPageProvider with ChangeNotifier {
@@ -6,13 +7,19 @@ class NewPostPageProvider with ChangeNotifier {
   final Future<void> Function(NewPostRequest)? createPost;
   final Map<NewPostForm, dynamic> formData;
   final GlobalKey<FormState> formKey;
+  final Future<String> Function(XFile)? uploadImage;
+
+  bool _showProgressIndicator = false;
 
   NewPostPageProvider({
     required this.alienId,
     this.createPost,
     required this.formData,
     required this.formKey,
+    this.uploadImage,
   });
+
+  bool get showProgressIndicator => _showProgressIndicator;
 
   void onChangeField(NewPostForm field, dynamic value) {
     formData[field] = value;
