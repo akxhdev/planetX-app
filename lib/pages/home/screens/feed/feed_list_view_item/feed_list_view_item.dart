@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:planetx/models/post.dart';
+import 'package:planetx/pages/home/screens/feed/feed_list_view_item/feed_image.dart';
+import 'package:planetx/widgets/loading_spinner.dart';
 
 class FeedListViewItem extends StatelessWidget {
   const FeedListViewItem({
@@ -18,6 +21,8 @@ class FeedListViewItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (post.imageUrl != null && (post.imageUrl!.startsWith("http")))
+            FeedImage(imageUrl: post.imageUrl!),
           ListTile(
             title: Text(post.content),
             subtitle: Text(
